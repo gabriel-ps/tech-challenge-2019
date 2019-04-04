@@ -32,14 +32,14 @@ cp .env-example .env
 php artisan key:generate
 nano .env
 ```
-*Creating local database*
+**Creating local database**
 ```
 mysql -uroot -hlocalhost -proot
 
 CREATE DATABASE desafio_hubchain;
 ```
 
-**MySQL Configuration Example**
+*MySQL Configuration Example*
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -49,7 +49,7 @@ DB_USERNAME=root
 DB_PASSWORD=root
 ```
 
-*Creating tables*
+**Creating tables**
 ```
 php artisan migrate
 ```
