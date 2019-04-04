@@ -2,7 +2,7 @@
 
 ## Development
 ```
-npm run server
+php artisan serve
 ```
 
 ## Deploy
