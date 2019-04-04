@@ -11,6 +11,23 @@
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
-});
+       return view('home');
+   })->middleware('auth');
+
+Route::get('/home', 'HomeController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/create/ticket','TicketController@create');
+Route::post('/create/ticket','TicketController@store');
+Route::get('/tickets', 'TicketController@index');
+Route::get('/edit/ticket/{id}','TicketController@edit');
+Route::patch('/edit/ticket/{id}','TicketController@update');
+Route::delete('/delete/ticket/{id}','TicketController@destroy');
+Route::any('/{default?}', 'TestController@yourMethod');
