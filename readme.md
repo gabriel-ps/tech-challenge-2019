@@ -58,3 +58,4 @@ php artisan migrate
 ```
 php artisan serve
 ```
+Access http://localhost:8000
