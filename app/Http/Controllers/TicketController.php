@@ -26,7 +26,7 @@ class TicketController extends Controller
     {
         $tickets = Ticket::where('user_id', auth()->user()->id)->get();
 
-        return view('user.index',compact('tickets'));
+        return view('tickets.index',compact('tickets'));
     }
 
     /**
@@ -36,7 +36,7 @@ class TicketController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        return view('tickets.create');
     }
 
     /**
@@ -81,7 +81,7 @@ class TicketController extends Controller
                         ->where('id', $id)
                         ->first();
 
-        return view('user.edit', compact('ticket', 'id'));
+        return view('tickets.edit', compact('ticket', 'id'));
     }
 
     /**
