@@ -12,7 +12,7 @@
     </div><br />
 @endif
     <div class="row">
-    <form method="post" action="{{url('/create/ticket')}}">
+    <form method="post" action="{{action('TicketController@store')}}">
         <div class="form-group">
             <input type="hidden" value="{{csrf_token()}}" name="_token" />
             <label for="title">Ticket Title:</label>
