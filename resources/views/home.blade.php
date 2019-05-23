@@ -16,8 +16,8 @@
 
                     <!-- You are logged in! -->
                     <div class="row">
-                       <a href="{{url('/create/ticket')}}" class="btn btn-success">Create Ticket</a>
-                       <a href="{{url('/tickets')}}" class="btn btn-default">All Tickets</a>
+                       <a href="{{action('TicketController@create')}}" class="btn btn-success">Create Ticket</a>
+                       <a href="{{action('TicketController@index')}}" class="btn btn-default">All Tickets</a>
                     </div>
                 </div>
             </div>
