@@ -15,6 +15,6 @@ abstract class TestCase extends BaseTestCase
 
         $this->be($user);
 
-        return $this;
+        return $user;
     }
 }

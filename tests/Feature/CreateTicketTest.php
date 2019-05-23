@@ -20,7 +20,7 @@ class CreateTicketTest extends TestCase
     }
 
     /** @test */
-    public function authenticated_user_may_create_tickets()
+    public function user_may_create_tickets()
     {
         // Given we have a signed in user
         $this->signIn();
