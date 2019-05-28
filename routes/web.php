@@ -11,16 +11,9 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::get('/', function () {
-       return view('home');
-   })->middleware('auth');
-
-Route::get('/home', 'HomeController@index');
-
 Auth::routes();
 
 Route::resource('tickets', 'TicketController');
+
+// Any other route will return the single page aplication html
+Route::get('/{any}', 'SpaController@index')->where('any', '.*');
