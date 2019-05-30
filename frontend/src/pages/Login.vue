@@ -34,7 +34,9 @@
                                               class="form-control"
                                               placeholder="Email..."
                                               v-model="email"
+                                              required
                                           />
+                                          <span class="text-danger" v-if="getError('email')">{{ getError('email') }}</span>
                                       </div>
                                   </span>
                                   <span class="bmd-form-group">
@@ -56,11 +58,11 @@
                                               class="form-control"
                                               placeholder="Password..."
                                               v-model="password"
+                                              required
                                           />
                                       </div>
                                   </span>
                               </div>
-                              {{email}} - {{password}}
                               <div class="md-layout-item md-size-100 text-center">
                                 <md-button type="submit" class="md-raised md-success">Login</md-button>
                               </div>
@@ -75,35 +77,41 @@
 </template>
 
 <script>
-import LoginService from '@/domain/login/LoginService';
+import AuthService from '@/domain/login/AuthService';
 
 export default {
   data() {
     return {
       email: '',
       password: '',
-      loginService: null
+      errors: null,
+      authService: null
     };
   },
   created() {
-    this.loginService = new LoginService(this.$resource);
+    this.authService = new AuthService(this.$resource);
   },
   methods: {
     login() {
-      if (!this.email) {
-        return;
-      }
-      if (!this.password) {
-        return;
-      }
+      this.errors = null;
 
-      this.loginService.attempt({
+      this.authService.attempt({
         email: this.email,
         password: this.password,
       })
       .then(response => {
-        console.log(response);
+        // console.log(response);
+        this.authService.setCurrentUser(response.body.user);
+
+        this.$router.push({ path: 'dashboard' })
+      })
+      .catch(response => {
+        // console.log(response.body);
+        this.errors = response.body.errors;
       });
+    },
+    getError(field) {
+      return this.errors && this.errors[field] ? this.errors[field][0] : '';
     }
   }
 };
@@ -122,16 +130,8 @@ export default {
     display: inline-block;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.1s;
-}
 
-.fade-enter,
-  .fade-leave-to
-    /* .fade-leave-active in <2.1.8 */
-
- {
-    opacity: 0;
+.text-danger {
+  display: block;
 }
 </style>

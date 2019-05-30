@@ -1,6 +1,10 @@
 // router setup
 import VueRouter from "vue-router";
 import routes from "@/routes/routes";
+import AuthService from '@/domain/login/AuthService';
+
+const authService = new AuthService();
+
 
 // configure router
 const router = new VueRouter({
@@ -12,7 +16,7 @@ router.beforeEach((to, from, next) => {
   // Redirecionar para login se não estiver logado e tentar acessar uma página restrita
   const publicPages = ["/login"];
   const authRequired = !publicPages.includes(to.path);
-  const loggedIn = localStorage.getItem("user");
+  const loggedIn = authService.getCurrentUser();
 
   if (authRequired && !loggedIn) {
     return next("/login");
